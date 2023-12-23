@@ -34,25 +34,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-function fetchNutrientDataForItem(foodID) {
-  const nutrientApiUrls = [
-    `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1110`,
-    `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1220`,
-    `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1240/`,
-    `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1310`
-  ];
+// function fetchNutrientDataForItem(foodID) {
+//   const nutrientApiUrls = [
+//     `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1110`,
+//     `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1220`,
+//     `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1240/`,
+//     `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1310`
+//   ];
 
-  const fetchPromises = nutrientApiUrls.map(url => 
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'X-API-Key': '170179'
-      }
-    }).then(response => response.json()));
+//   const fetchPromises = nutrientApiUrls.map(url => 
+//     fetch(url, {
+//       method: 'GET',
+//       headers: {
+//         'Accept': 'application/json',
+//         'X-API-Key': '170179'
+//       }
+//     }).then(response => response.json()));
   
-    return Promise.all(fetchPromises);
-  }
+//     return Promise.all(fetchPromises);
+//   }
 
 
 
