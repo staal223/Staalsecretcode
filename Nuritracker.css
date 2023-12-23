@@ -1,0 +1,217 @@
+/* Style for the main navigation */
+.main-nav {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(120deg, #abcdef, #89abcd);
+    padding: 10px 20px;
+    color: white;
+}
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+/* If you want to apply to all elements */
+* {
+  font-family: 'Nunito', sans-serif;
+  color: black;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: start; /* Adjust as needed */
+  /* Add other styles such as padding or background color */
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+
+.main-nav a {
+  text-decoration: none;
+    color: white;
+    margin: 0 15px;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+.nav-items a:hover {
+  color: #adffc4;
+}
+
+.wave {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  bottom: -10px;
+  background: white;
+}
+
+/* Add pseudo-elements for wave effect */
+.wave:before,
+.wave:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1000px; /* Large width to create the curved shape */
+  height: 1000px; /* Large height to create the curved shape */
+  bottom: 5px;
+  z-index: -1;
+  background: inherit; /* Take the background from the .wave element */
+  border-radius: 50%;
+}
+
+.wave:before {
+  left: 50%;
+  transform: translateX(-50%) scaleX(1.5) /* Stretch the circle to an ellipse */
+}
+
+.wave:after {
+  left: 0;
+  transform: scaleX(1.5); /* Stretch the circle to an ellipse */
+}
+
+
+
+
+/* Style for the header */
+.header {
+  background-color: #0e837996; /* Example color */
+  padding: 20px;
+  text-align: center;
+}
+
+/* Style for the dashboard content */
+.dashboard-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.card {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 200px; /* Or whatever width you prefer */
+  margin: 10px;
+  text-align: center;
+}
+
+/* Style for the footer */
+.footer {
+  background-color: #eceff1; /* Example color */
+  padding: 100px 100px;
+  text-align: center;
+}
+
+
+
+
+.meal-creator {
+  font-family: 'Nunito', sans-serif; /* Choose your font */
+}
+
+.meal-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f0f4f8; /* Choose your color */
+  border-radius: 8px;
+  /* Add other styles */
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #5cb85c;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+/* Modal Styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+#ingredients-select {
+  color: black; /* Ensure text is visible */
+  padding: 10px; /* More standard padding */
+  margin: 5px 0; /* Adjust as needed */
+  width: 100%; /* Full width within its container */
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* Adjust top margin */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* Adjust width for different screen sizes */
+  max-width: 600px; /* Maximum width */
+}
+
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+#meal-tracker {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.meal-container {
+  background-color: #f2f2f2; /* Light gray background */
+  border-radius: 8px; /* Rounded corners */
+  padding: 20px; /* Padding around the content */
+  margin: 20px 0; /* Some margin to the top and bottom */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.meal-container h2 {
+  color: #333; /* Dark text for the heading */
+  margin-bottom: 15px; /* Spacing below the heading */
+}
+
+#meals-list {
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+}
+
+#meals-list div {
+  background-color: white; /* White background for each meal */
+  border: 1px solid #ddd; /* Light border for each meal */
+  padding: 10px; /* Padding inside each meal */
+  margin-bottom: 10px; /* Space between meals */
+  border-radius: 4px; /* Slightly rounded corners for each meal */
+}
+
+
+/* Add more styles for layout, fonts, and colors */

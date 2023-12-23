@@ -1,0 +1,79 @@
+<!-- meal-tracker.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Tracker</title>
+    <link rel="stylesheet" href="Nuritracker.css">
+    <link rel="stylesheet" href="Mealtracker.css">
+</head>
+<body>
+    <div class="meal-tracker">
+        <header>
+            <!-- Your header here -->
+            <nav class="main-nav">
+              <div class="logo">
+                NutriTracker 🍏
+            </div>
+                <a href="index.html">Dashboard</a>
+                <a href="Meal creator.html">Meal Creator</a> <!-- Link to the Meal Creator page -->
+                <a href="meal-tracker.html">Meal Tracker</a> <!-- Link to the Meal Tracker page -->
+                <a href="nutri.report.html">Nutri Report</a>
+                </nav>
+        </header>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+        <main>
+            <div id="meal-tracker">
+                <div class="meal-section">
+                  <h2>Meal Tracker</h2>
+                  <div class="meal-attributes">
+                    <div>Meal and source</div>
+                    <div>Meal</div>
+                    <div>Weight & Energy</div>
+                    <div>Added on</div>
+                    <div>% of daily cons.</div>
+                  </div>
+                  <!-- Your meal entries will go here -->
+                </div>
+                <!-- Button for adding meals -->
+                <div class="meal-add-buttons">
+                    
+                    <button id="addbuttonwater">+</button>
+                    <button id="addbutton" onclick=readStorage();> + </button>
+                    <div id="helloContainer"></div>
+                </div>
+              </div>
+
+
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form id="addMealForm">
+      <label for="meal-name">Meal Name:</label>
+      <input type="text" id="meal-name" name="meal-name" required>
+      <!-- Additional fields for meal details -->
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+</div>
+        <footer class="footer">
+      <div id= "jsonData">
+        
+
+      </div>
+        </footer>
+    </div>
+    <div id="api-content">
+        <!-- API content will go here -->
+    </div>
+    <!-- <script src="Nuritrackerfunc.js"></script> -->
+    <script src="app.js"></script>
+    
+</body>
+</html>

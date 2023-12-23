@@ -1,0 +1,40 @@
+body {
+    font-family: 'Nunito', sans-serif;
+  }
+  
+  /* If you want to apply to all elements */
+  * {
+    font-family: 'Nunito', sans-serif;
+  }
+.nutri-report-container {
+    width: 80%;
+    margin: auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead th {
+    background-color: #e4e4e4;
+    padding: 10px;
+    text-align: left;
+}
+
+tbody td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    padding-right: 955px;
+}

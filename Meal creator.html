@@ -1,0 +1,75 @@
+<!-- meal-creator.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Creator</title>
+    <link rel="stylesheet" href="Nuritracker.css">
+</head>
+<body>
+    <div class="meal-creator">
+        <header>
+            <!-- Your header here -->
+            <nav class="main-nav">
+              <div class="logo">
+                NutriTracker 🍏
+            </div>
+                <a href="index.html">Dashboard</a>
+                <a href="Meal creator.html">Meal Creator</a> <!-- Link to the Meal Creator page -->
+                <a href="meal-tracker.html">Meal Tracker</a> <!-- Link to the Meal Tracker page -->
+                <a href="nutri.report.html">Nutri Report</a>
+                </nav>
+        </header>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+        <main>
+            <h1>Meal Creator</h1>
+
+
+    <button id="create-meal-button">Create Meal</button>
+
+            <!-- Create Meal Modal (hidden by default) -->
+            <div id="create-meal-modal" class="modal">
+              <div class="modal-content">
+
+                <span class="close-button">&times;</span>
+                
+                <h2>Create a Meal</h2>
+
+
+                <form id="create-meal-form">
+                    <input type="text" id="meal-name" placeholder="Enter meal name" required>
+                    <input type="text" id="search-bar" placeholder="Search for food items">
+                    <select id="ingredients-select" multiple required>
+                      <!-- Ingredient options will be populated here -->
+                    </select>
+                    <button type="button" id="add-ingredient-btn">Add Ingredient</button>
+                    <ul id="meal-list"></ul>
+                    <button id="open-create-meal-modal">Create Meal</button>
+
+                  </form>
+                </div>
+              </div>
+        
+
+              <div class="meal-container">
+                <h2>Created Meals</h2>
+                
+                <div id="meals-list" >Meal list</div>
+                    <!-- Meals will be displayed here -->
+                </div>
+            </div>
+            
+
+
+</section>
+        <footer class="footer">
+
+        </footer>
+    </div>
+    <div id="api-content">
+        <!-- API content will go here -->
+    </div>
+    <script src="Nuritrackerfunc.js"></script>
+</body>
+</html>

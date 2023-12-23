@@ -1,0 +1,59 @@
+<!-- meal-tracker.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Tracker</title>
+    <link rel="stylesheet" href="nutrireport.css">
+    <link rel="stylesheet" href="Nuritracker.css">
+</head>
+<body>
+    <div class="meal-tracker">
+        <header>
+            <!-- Your header here -->
+            <nav class="main-nav">
+                <div class="logo">
+                    NutriTracker 🍏
+                </div>
+                <a href="index.html">Dashboard</a>
+                <a href="Meal creator.html">Meal Creator</a> <!-- Link to the Meal Creator page -->
+                <a href="meal-tracker.html">Meal Tracker</a> <!-- Link to the Meal Tracker page -->
+                <a href="nutri.report.html">Nutri Report</a>
+                </nav>
+        </header>
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+        <main>
+
+            <div class="nutri-report-container">
+                <h1>Nutri Report</h1>
+                <table id="nutri-report-table">
+                    <thead>
+                        <tr>
+                            <th>Meal Name</th>
+                            <th>Meals</th>
+                            <th>Water</th>
+                            <th>kcal consumed</th>
+                            <th>Protein</th>
+                            <th>Fedt</th>
+                            <th>Fiber</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Table rows will be inserted here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <!-- Footer content -->
+        </footer>
+    </div>
+    <div id="api-content">
+        <!-- API content will go here -->
+    </div>
+    <script src="Report.js"></script>
+    
+</body>
+</html>
