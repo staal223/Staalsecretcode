@@ -5,11 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Update the modal opening logic
   btn.onclick = function() {
-    const mealName = prompt("Please enter a name for your meal:", "");
-    if (mealName) {
-        document.getElementById("meal-name").value = mealName;
+    if (document.getElementById("meal-name").value) {
         modal.style.display = "block";
-        fetchFoodItems();
+        fetchFoodItems();        
     } else {
         alert("You need to enter a meal name to proceed.");
     }
@@ -27,63 +25,40 @@ document.addEventListener('DOMContentLoaded', function() {
 
   document.getElementById('add-ingredient-btn').addEventListener('click', function() {
     var selectedIngredient = document.getElementById('ingredients-select').value;
-    addToMealList(selectedIngredient);
+    addIngredient(selectedIngredient);
   });
 
 });
 
+// Call loadMeals when the page loads
+window.onload = loadMeals;
 
 
-function fetchNutrientDataForItem(foodID) {
-  const nutrientApiUrls = [
-    `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1110`,
-    `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1220`,
-    `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1240/`,
-    `https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/${foodID}/BySortKey/1310`
-  ];
-
-  const fetchPromises = nutrientApiUrls.map(url => 
-    fetch(url, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'X-API-Key': '170179'
-      }
-    }).then(response => response.json()));
-  
-    return Promise.all(fetchPromises);
-  }
-
-
-
-// Modified fetchFoodItems function to include search functionality
-function fetchFoodItems(searchTerm = '') {
+// Populate select dropdown function and other placeholder functions remain unchanged...
+function fetchFoodItems() {
   const apiUrl = 'https://nutrimonapi.azurewebsites.net/api/FoodItems';
   const headers = {
     'accept': 'text/plain',
     'X-API-Key': '170179'
   };
 
-  // Append searchTerm in query if present
-  const queryUrl = searchTerm ? `${apiUrl}?search=${encodeURIComponent(searchTerm)}` : apiUrl;
-
-  fetch(queryUrl, { headers: headers })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      populateSelectDropdown(data);
-    })
-    .catch(error => {
-      console.error('Error fetching data: ', error);
-    });
+  return fetch(apiUrl, { headers })
+    .then(response => response.json())
+    .then(data => data)
+    .catch(error => console.error('Error fetching data:', error));
 }
 
-// Populate select dropdown function and other placeholder functions remain unchanged...
-
+function fetchFoodItemNutrient(foodId) {
+  const apiUrl = 'https://nutrimonapi.azurewebsites.net/api/FoodCompSpecs/ByItem/'+foodId+'/BySortKey/1110';
+  const headers = {
+    'accept': 'text/plain',
+    'X-API-Key': '170179'
+  };
+  return fetch(apiUrl, { headers })
+  .then(response => response.json())
+  .then(data => data)
+  .catch(error => console.error('Error fetching data:', error));
+}
 
 // Function to populate the select dropdown with fetched food items
 function populateSelectDropdown(items) {
@@ -91,108 +66,152 @@ function populateSelectDropdown(items) {
   select.innerHTML = '';
 
   items.forEach(item => {
-    fetchNutrientDataForItem(item.foodID).then(nutrientData => {
-      const option = document.createElement('option');
-      option.value = item.foodID;
-      option.textContent = `${item.foodName} - Nutrients: ...`; // Format as needed
-      select.appendChild(option);
-    });
+    const option = document.createElement('option');
+    option.textContent = item.foodName
+    option.value = item.foodID; 
+    //fetchFoodItemNutrient(item.foodID).then()
+    select.appendChild(option);
   });
 }
 
-// Make sure fetchNutrientDataForItem returns nutrientData in a format that can be used here.
+fetchFoodItems().then(foodItems => {
+  populateSelectDropdown(foodItems);
+});
 
 
-// These functions are placeholders for functionality to add/remove ingredients from a list
+
 function addIngredient(ingredientId) {
-  // Logic to add ingredient to the list
-}
+  const select = document.getElementById('ingredients-select');
+  const selectedItems = [];
 
-function removeIngredient(ingredientId) {
-  // Logic to remove ingredient from the list
-}
-
-
-
-
-
-var selectedItems = [];
-
-function addToMeal(foodID, foodName) {
-  selectedItems.push({ foodID, foodName });
-  updateMealList();
-}
-
-function deleteFromMeal(foodID) {
-  selectedItems = selectedItems.filter(item => item.foodID !== foodID);
-  updateMealList();
-}
-
-function addToMealList(ingredientId) {
-  // Find the ingredient in the fetched data
-  var foodItems = JSON.parse(localStorage.getItem('foodItems'));
-  var ingredient = foodItems.find(item => item.foodID == ingredientId);
-
-  if (ingredient) {
-    var mealList = document.getElementById('meal-list');
-    var listItem = document.createElement('li');
-    listItem.textContent = ingredient.foodName; // Assuming 'foodName' is the property
-    mealList.appendChild(listItem);
+  for (let option of select.options) {
+    if (option.selected) {
+      const item = {
+        id: option.value,
+        name: option.text,
+        additionalInfo: "Nutrients: ..." 
+      };
+      selectedItems.push(item);
+    }
   }
+  // Temporarily store the selected items
+  window.currentSelection = selectedItems;
+  saveMeal()
 }
 
 
-function updateMealList() {
-  const mealList = document.getElementById('meal-list');
-  mealList.innerHTML = ''; // Clear current list
-
-  selectedItems.forEach(item => {
-    const listItem = document.createElement('li');
-    listItem.textContent = item.foodName;
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = 'Delete';
-    deleteBtn.onclick = () => deleteFromMeal(item.foodID);
-    listItem.appendChild(deleteBtn);
-    mealList.appendChild(listItem);
-  });
-}
-
-
-
-// Function for creating a meal
-function createMeal() {
+// This function creates a JSON file from the selected items and triggers a download
+function saveMeal() {
   const mealName = document.getElementById('meal-name').value.trim();
-  if (!mealName) {
-    alert('Please enter a name for the meal.');
+  if (!window.currentSelection || window.currentSelection.length === 0) {
+    alert('No items selected for the meal');
     return;
   }
 
-  const newMeal = {
-    name: mealName,
-    items: selectedItems
-  };
-
-  saveMeal(newMeal);
-}
-
-// Function to save the meal
-function saveMeal(meal) {
-  let meals = JSON.parse(localStorage.getItem('meals')) || [];
-  meals.push(meal);
+  // Load existing meals from localStorage or initialize an empty object
+  const meals = JSON.parse(localStorage.getItem('meals')) || {};
+  
+  // Save the current selection under the specified meal
+  meals[mealName] = window.currentSelection;
   localStorage.setItem('meals', JSON.stringify(meals));
 
-  displayMeals(); // Update the display
+  // Clear current selection and meal name input
+  window.currentSelection = [];  
+  document.getElementById('meal-name').value = '';
+  document.getElementById('ingredients-select').value = [];
+
+  alert(`Meal '${mealName}' saved successfully`);
 }
 
-// Function to display meals
-function displayMeals() {
-  const meals = JSON.parse(localStorage.getItem('meals')) || [];
-  const mealsList = document.getElementById('meals-list');
-  mealsList.innerHTML = '';
 
-  meals.forEach(meal => {
-    const mealElement = document.createElement('div');
-    mealElement.textContent = `${meal.name}: ${meal.items.map(item => item.foodName).join(', ')}`;
-    mealsList.appendChild(mealElement);
-  });
+
+function loadMeals() {
+  const storedMeals = localStorage.getItem('meals');
+  const mealsContainer = document.getElementById('data-container');
+  let mealCounter = 1
+  // Clear existing content
+  mealsContainer.innerHTML = '';
+
+  if (storedMeals) {
+    const meals = JSON.parse(storedMeals);
+    const numMeal = Object.keys(meals).length
+
+    Object.keys(meals).forEach(mealName => {
+      const mealDiv = document.createElement('div');
+      mealDiv.className = 'meal';
+
+      const mealTitle = document.createElement('h3');
+      mealTitle.textContent = ' #' + mealCounter + ' ' + mealName + ' Number of ingredients ' + meals[mealName].length;
+      mealDiv.appendChild(mealTitle);
+      mealCounter++
+      
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.onclick = function() {
+        if (confirm(`Are you sure you want to delete the meal '${mealName}'?`)) {
+          deleteMeal(mealName);
+        }
+      };
+      mealDiv.appendChild(deleteButton);
+  
+      mealsContainer.appendChild(mealDiv);
+      const itemList = document.createElement('ul');
+      meals[mealName].forEach(item => {
+        const itemLi = document.createElement('li');
+        itemLi.textContent = `${item.name} (ID: ${item.id}) - ${item.additionalInfo}`;
+        itemList.appendChild(itemLi);
+        // Create a delete button for each ingredient
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete Ingredient';
+        deleteButton.onclick = function() {
+          if (confirm(`Are you sure you want to delete '${item.name}' from '${mealName}'?`)) {
+            deleteIngredient(mealName, item.id);
+          }
+        };
+        itemLi.appendChild(deleteButton);
+        itemList.appendChild(itemLi);
+      });
+
+      mealDiv.appendChild(itemList);
+      mealsContainer.appendChild(mealDiv);
+    });
+  } else {
+    mealsContainer.innerHTML = '<p>No meals stored</p>';
+  }
+}
+
+function deleteMeal(mealName) {
+  const storedMeals = localStorage.getItem('meals');
+  if (storedMeals) {
+    const meals = JSON.parse(storedMeals);
+
+    if (meals[mealName]) {
+      delete meals[mealName]; // Remove the specified meal
+      localStorage.setItem('meals', JSON.stringify(meals)); // Update localStorage
+      alert(`Meal '${mealName}' deleted successfully`);
+      loadMeals(); // Refresh the displayed meals
+    } else {
+      alert(`Meal '${mealName}' not found`);
+    }
+  } else {
+    alert('No meals stored');
+  }
+}
+
+function deleteIngredient(mealName, ingredientId) {
+  const storedMeals = localStorage.getItem('meals');
+  if (storedMeals) {
+    const meals = JSON.parse(storedMeals);
+
+    if (meals[mealName]) {
+      meals[mealName] = meals[mealName].filter(item => item.id !== ingredientId);
+      localStorage.setItem('meals', JSON.stringify(meals));
+      alert(`Ingredient '${ingredientId}' deleted successfully from '${mealName}'`);
+      loadMeals(); // Refresh the displayed meals
+    } else {
+      alert(`Meal '${mealName}' not found`);
+    }
+  } else {
+    alert('No meals stored');
+  }
 }

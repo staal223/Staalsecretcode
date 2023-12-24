@@ -25,25 +25,18 @@
         <main>
             <h1>Meal Creator</h1>
 
-
+    <input type="text" id="meal-name" placeholder="Enter Meal Name" autocomplete="off">
     <button id="create-meal-button">Create Meal</button>
-
             <!-- Create Meal Modal (hidden by default) -->
             <div id="create-meal-modal" class="modal">
               <div class="modal-content">
-
-                <span class="close-button">&times;</span>
-                
-                <h2>Create a Meal</h2>
-
-
+                <span class="close-button">&times;</span>                
+                <h2>Add ingrediens to meal - </h2>
                 <form id="create-meal-form">
-                    <input type="text" id="meal-name" placeholder="Enter meal name" required>
-                    <input type="text" id="search-bar" placeholder="Search for food items">
-                    <select id="ingredients-select" multiple required>
+                    <select id="ingredients-select" multiple onchange>
                       <!-- Ingredient options will be populated here -->
                     </select>
-                    <button type="button" id="add-ingredient-btn">Add Ingredient</button>
+                    <button type="button" id="add-ingredient-btn" onclick="saveMeal()">Add Ingredient</button>
                     <ul id="meal-list"></ul>
                     <button id="open-create-meal-modal">Create Meal</button>
 
@@ -54,8 +47,9 @@
 
               <div class="meal-container">
                 <h2>Created Meals</h2>
-                
-                <div id="meals-list" >Meal list</div>
+                <button onclick="loadMeals()">Load Data</button>
+                <div id="data-container">Ingrediens</div>
+
                     <!-- Meals will be displayed here -->
                 </div>
             </div>
