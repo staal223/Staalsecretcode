@@ -213,5 +213,27 @@ button {
   border-radius: 4px; /* Slightly rounded corners for each meal */
 }
 
+.item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.meal {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
+.meal h3 {
+  margin: 0 0 10px 0;
+}
+
+.meal ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.meal li {
+  margin-bottom: 5px;
+}
 /* Add more styles for layout, fonts, and colors */
